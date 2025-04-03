@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>correção do exercicio - JOÃO PEDRO</title>
+    <link rel="stylesheet" href="css/teste.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Avaliação do Aluno</h2>
+        <input type="number" id="nota" placeholder="Digite a nota (0 a 10)" min="0" max="10">
+        <button onclick="vernota()">Verificar</button>
+        <p class="resultado" id="resultado"></p>
+    </div>
+    
+    <script>
+        function vernota() {
+            let nota = parseFloat(document.getElementById("nota").value);
+            let resultado = document.getElementById("resultado");
+
+            if (isNaN(nota) || nota < 0 || nota > 10) {
+                resultado.textContent = "Nota inválida! Digite um valor entre 0 e 10.";
+                resultado.style.color = "red";
+            } else if (nota >= 7) {
+                resultado.textContent = "Aprovado";
+                resultado.style.color = "green";
+            } else if (nota >= 5) {
+                resultado.textContent = "Recuperação";
+                resultado.style.color = "orange";
+            } else {
+                resultado.textContent = "Reprovado";
+                resultado.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
