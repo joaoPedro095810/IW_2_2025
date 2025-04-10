@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Média do Aluno</title>
+</head>
+<body>
+  <h1>Média do Aluno</h1>
+  <button onclick="menuInterativo()">Iniciar Programa</button>
+  <p id="resultado"></p>
+
+  <script>
+    function menuInterativo() {
+      let opcao = 0;
+
+      while (opcao !== 2) {
+        opcao = parseInt(prompt(
+          "===== MENU PRINCIPAL =====\n" +
+          "1 - Calcular média\n" +
+          "2 - Sair\n\n" +
+          "Escolha uma opção:"
+        ));
+
+        switch (opcao) {
+          case 1:
+            let nota1 = parseFloat(prompt("Digite a primeira nota (0 a 10):"));
+            let nota2 = parseFloat(prompt("Digite a segunda nota (0 a 10):"));
+
+            // Validação
+            if (
+              isNaN(nota1) || isNaN(nota2) ||
+              nota1 < 0 || nota1 > 10 ||
+              nota2 < 0 || nota2 > 10
+            ) {
+              alert("Erro: As notas devem ser números entre 0 e 10.");
+              break;
+            }
+
+            let media = (nota1 + nota2) / 2;
+            let mensagem = `Média: ${media.toFixed(2)}\n`;
+
+            if (media >= 7) {
+              mensagem += "Situação: Aprovado";
+            } else if (media >= 5) {
+              mensagem += "Situação: Recuperação";
+            } else {
+              mensagem += "Situação: Reprovado";
+            }
+            
+            alert(mensagem);
+            document.getElementById("resultado").innerText = mensagem;
+
+            alert("Saindo do programa...");
+            break;
+
+          case 2:
+            alert("Saindo do programa...");
+            break;
+
+          default:
+            alert("Opção inválida! Escolha 1 ou 2.");
+        }
+      }
+    }
+  </script>
+</body>
