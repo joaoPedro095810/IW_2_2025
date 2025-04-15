@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>exercicio-03</title>
+</head>
+<body>
+
+  <h1>contagem de 1 a 10</h1>
+  <button onclick="contar()">iniciar contagem</button>
+
+  <ul id="listanumeros"></ul>
+
+  <script>
+    function contar() {
+      const lista = document.getElementById("listanumeros");
+      lista.innerHTML = "";
+      for (let i = 1; i <= 10; i++) {
+        const item = document.createElement("li");
+        item.textContent = i;
+        lista.appendChild(item);
+      }
+    }
+  </script>
+
+</body>
+</html>

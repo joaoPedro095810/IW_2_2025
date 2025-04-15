@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio-02</title>
+</head>
+<body>
+
+  <h2>digite sua idade:</h2>
+  <input type="number" id="idade">
+  <button onclick="verificar()">verificar</button>
+
+  <p id="mensagem"></p>
+
+  <script>
+    function verificar() {
+      var idade = document.getElementById("idade").value;
+      var mensagem = document.getElementById("mensagem");
+
+      if (idade >= 18) {
+        mensagem.innerText = "voce e um adulto.";
+      } else {
+        mensagem.innerText = "voce e menor de idade.";
+      }
+    }
+  </script>
+
+</body>
+</html>

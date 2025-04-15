@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio-01</title>
+</head> 
+<body>
+  <h2>Digite um numero:</h2>
+  <input id="numero">
+  <button onclick="verificar()">verificar</button>
+  <p id="resultado"></p>
+  <script>
+    function verificar() {
+      let n = document.getElementById("numero").value;
+      let resultado = document.getElementById("resultado");
+      
+      if (n % 2 == 0) {
+        resultado.innerText = "e par";
+      } else {
+        resultado.innerText = "e impar";
+      }
+    }
+  </script>
+
+</body>
+</html>

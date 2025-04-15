@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio-05</title>
+
+</head>
+<body>
+    <h1>Tabuada de Multiplicação</h1>
+    <label for="numero">digite um numero:</label>
+    <input type="number" id="numero" min="1" />
+    <button onclick="mostrarTabuada()">mostrar tabuada</button>
+
+    <div id="tabuada"></div>
+
+    <script>
+        function mostrarTabuada() {
+            var numero = document.getElementById("numero").value;
+            var tabuadaDiv = document.getElementById("tabuada");
+
+            tabuadaDiv.innerHTML = ""; // limpa a tabuada anterior
+
+            if (numero === "") {
+                alert("Por favor, insira um número.");
+                return;
+            }
+
+            for (var i = 1; i <= 10; i++) {
+                var resultado = numero * i;
+                var p = document.createElement("p");
+                p.classList.add("resultado");
+                p.textContent = `${numero} x ${i} = ${resultado}`;
+                tabuadaDiv.appendChild(p);
+            }
+        }
+    </script>
+</body>
+</html>
