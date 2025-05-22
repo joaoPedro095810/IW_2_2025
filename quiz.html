@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz com Temporizador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question.correct {
+      background-color: #d4edda;
+    }
+
+    .question.incorrect {
+      background-color: #f8d7da;
+    }
+
+    .icon {
+      font-size: 20px;
+      margin-left: 10px;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    #timer {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quiz de Conhecimentos Gerais</h1>
+<div id="timer">Tempo: 0 segundos</div>
+
+<form id="quizForm"></form>
+
+<button onclick="checkAnswers()">Finalizar Quiz</button>
+
+<div id="result"></div>
+
+<script>
+  const questions = [
+    {
+      question: "Qual é a principal cidade do Brasil?",
+      options: ["São Paulo", "Rio de Janeiro", "Fortaleza", "Belo Horizonte"],
+      answer: 0
+    },
+    {
+      question: "Quem ganhou a Copa do Mundo de 1994?",
+      options: ["Brasil", "Alemanha", "Argentina", "Itália"],
+      answer: 0
+    },
+    {
+      question: "Quanto é 7 x 7?",
+      options: ["56", "63", "72", "49"],
+      answer: 1
+    },
+    {
+      question: "Qual é o maior oceano do mundo?",
+      options: ["Atlântico", "Pacífico", "Índico", "Ártico"],
+      answer: 1
+    },
+    {
+      question: "Em que ano foi realizada a primeira Copa do Mundo?",
+      options: ["1934", "1920", "1930", "1933"],
+      answer: 2
+    },
+    {
+      question: "Quem foi o artilheiro da Copa do Mundo de 2002?",
+      options: ["Ronaldo", "Klose", "Rivaldo", "Ronaldinho"],
+      answer: 0
+    },
+    {
+      question: "Quantos estados tem o Brasil?",
+      options: ["24", "25", "26", "27"],
+      answer: 2
+    },
+    {
+      question: "Quem pintou a Mona Lisa?",
+      options: ["Michelangelo", "Leonardo da Vinci", "Van Gogh", "Picasso"],
+      answer: 1
+    },
+    {
+      question: "Qual a fórmula da água?",
+      options: ["CO2", "H2SO4", "H2O", "O2"],
+      answer: 2
+    },
+    {
+      question: "Quem sediou a Copa do Mundo de 2018?",
+      options: ["Croácia", "França", "Rússia", "Brasil"],
+      answer: 2
+    }
+  ];
+
+  let startTime = Date.now();
+
+  function renderQuiz() {
+    const form = document.getElementById("quizForm");
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p>${i + 1}. ${q.question}</p>`;
+      q.options.forEach((opt, j) => {
+        div.innerHTML += `
+          <label>
+            <input type="radio" name="q${i}" value="${j}">
+            ${opt}
+          </label><br>
+        `;
+      });
+      form.appendChild(div);
+    });
+  }
+
+  function checkAnswers() {
+    const form = document.getElementById("quizForm");
+    const result = document.getElementById("result");
+    const questionsDiv = form.querySelectorAll(".question");
+    let correct = 0;
+    let incorrect = 0;
+
+    questions.forEach((q, i) => {
+      const selectedInput = form["q" + i];
+      const selected = selectedInput ? selectedInput.value : null;
+      const div = questionsDiv[i];
+
+      if (selected == q.answer) {
+        div.classList.add("correct");
+        div.innerHTML += `<span class="icon">✅</span>`;
+        correct++;
+      } else {
+        div.classList.add("incorrect");
+        div.innerHTML += `<span class="icon">❌</span>`;
+        incorrect++;
+      }
+
+      const inputs = div.querySelectorAll("input");
+      inputs.forEach(inp => inp.disabled = true);
+    });
+
+    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+
+    result.innerHTML = `
+      <p>Acertos: ${correct}</p>
+      <p>Erros: ${incorrect}</p>
+      <p>Tempo total: ${elapsedSeconds} segundos</p>
+    `;
+  }
+
+  function updateTimer() {
+    const timerDiv = document.getElementById("timer");
+    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+    timerDiv.textContent = `Tempo: ${elapsedSeconds} segundos`;
+  }
+
+  setInterval(updateTimer, 1000);
+
+  renderQuiz();
+</script>
+
+</body>
+</html>
